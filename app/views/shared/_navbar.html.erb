@@ -1,7 +1,26 @@
-<nav>
-  <ul>
-    <li class="bg-violet-500"><%= link_to "Inicio", root_path %></li>
-    <li><%= link_to "Productos", products_path %></li>
-    <li><%= link_to "Usuarios", users_path %></li>
-  </ul>
-</nav>
+<header class=" bg-black/95 border-b border-pink-600/20 text-white sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-5">
+    
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span><%= link_to "Elysium", root_path %></span>
+
+      </div>
+      <div>
+        <span><%= link_to "Productos", products_path %></span>
+      </div>
+      <div>
+        <span><%= link_to "Usuarios", users_path %></span>
+      </div>
+      
+      <div>
+        <button
+          class="p-2 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-500 hover:from-purple-900 hover:to-fuchsia-700 border-0">
+            <span>
+              Login
+            </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

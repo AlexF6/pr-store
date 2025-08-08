@@ -1,22 +1,25 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+  <div class="group rounded-xl overflow-hidden border border-gray-800 hover:border-pink-500/50 transition-all duration-300 bg-gray-900/50 backdrop-blur-sm">
+    <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-pink-800/10 to-purple-900/10">
+      <%# Replace with real image URL or Active Storage %>
+      <%# <%= image_tag product.image_src, alt: product.name, class: "object-cover w-full h-full" %>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-100 group-hover:opacity-50 transition-opacity duration-300"></div>
+    </div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
-
-  <p>
-    <strong>Stock:</strong>
-    <%= product.stock %>
-  </p>
-
+    <div class="p-6 space-y-4">
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold group-hover:text-pink-300 transition-colors">
+          <%= product.name %>
+        </h3>
+        <p class="text-gray-400 text-sm leading-relaxed line-clamp-2">
+          <%= truncate(product.description, length: 100) %>
+        </p>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <%= number_to_currency(product.price, unit: "$", separator: ",", delimiter: ".", precision: 0) %>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
