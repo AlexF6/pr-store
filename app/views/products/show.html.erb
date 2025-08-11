@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @product %>
-
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
-
-  <%= button_to "Destroy this product", @product, method: :delete %>
+<div class="flex max-w-100 mx-auto justify-center space-y-6 text-gray-400 py-20 lg:py-32">
+  <div class="space-y-6">
+    <%= render @product %>
+    <div class="flex justify-between gap-6">
+      <%= link_to "Edit this product", edit_product_path(@product), class: "text-center border rounded-xl p-2 px-6"  %>
+      <%= button_to "Destroy this product", @product, method: :delete, class: "border rounded-xl p-2 px-6" %>
+    </div>
+    <%= link_to "Back to products", products_path, class: "flex justify-center text-center border rounded-xl p-2 px-6 w-full"  %>
+  </div>
 </div>
+

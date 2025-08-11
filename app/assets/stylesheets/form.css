@@ -1,0 +1,9 @@
+.description-field {
+  resize: none;
+  width: 100%;
+  padding: 10px;
+}
+
+.description-field:focus {
+  outline: none;
+}

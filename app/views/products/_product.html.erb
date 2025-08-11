@@ -1,22 +1,28 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
+<div class="text-gray-400" id="<%= dom_id product %>">
+  <div class="flex flex-col space-y-6 border p-6 rounded-2xl">
+    <p class="flex justify-between">
+      <strong class="text-gray-400 font-medium">Name:</strong>
+      <%= product.name %>
+    </p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
+    <p class="flex justify-between">
+      <strong class="text-gray-400 font-medium">Description:</strong>
+      <%= product.description %>
+    </p>
 
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
+    <p class="flex justify-between">
+      <strong class="text-gray-400 font-medium">Price:</strong>
+      <%= product.price %>
+    </p>
 
-  <p>
-    <strong>Stock:</strong>
-    <%= product.stock %>
-  </p>
-
+    <p class="flex justify-between">
+      <strong class="text-gray-400 font-medium">Stock:</strong>
+      <%= product.stock %>
+    </p>
+    
+    <p class="flex justify-between">
+      <strong class="text-gray-400 font-medium">image_src:</strong>
+      <%= product.image_src %>
+    </p>
+  </div>
 </div>

@@ -11,27 +11,49 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="space-y-6">
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-400 text-xl">
+        <%= form.label :name, style: "display: block" %>
+      </span>
+      <%= form.text_field :name, class: "bg-[#111] rounded-xl p-4 w-full focus:outline-0" %>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-400 text-xl">
+        <%= form.label :description, style: "display: block" %>
+      </span>
+      <%= form.textarea :description, class: "description-field bg-[#111] rounded-xl p-4 w-full h-24" %>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-400 text-xl">
+        <%= form.label :price, style: "display: block" %>
+      </span>
+      <%= form.text_field :price, class: "bg-[#111] rounded-xl p-4 w-full focus:outline-0" %>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-400 text-xl">
+        <%= form.label :stock, style: "display: block" %>
+      </span>
+      <%= form.number_field :stock, class: "bg-[#111] rounded-xl p-4 w-full focus:outline-0" %>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-400 text-xl">
+        <%= form.label :image_src, style: "display: block" %>
+      </span>
+      <%= form.text_field :image_src, class: "bg-[#111] rounded-xl p-4 w-full focus:outline-0" %>
+    </div>
+    <div class="flex justify-between">
+      <%= form.submit class: "text-center border p-2 px-6 rounded-xl border-gray-500" %>
+      <%= link_to "Show this product", @product, class: "text-center border p-2 px-6 rounded-xl border-gray-500" %>
+    </div>
+    <div class="flex flex-col gap-1">
+      <%= link_to "Back to products", products_path, class: "w-full text-center border p-2 px-6 rounded-xl border-gray-500" %>
+    </div>
+
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
-  </div>
-
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div>
-    <%= form.label :stock, style: "display: block" %>
-    <%= form.number_field :stock %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
