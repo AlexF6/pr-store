@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%# <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.dots.min.js"></script> %>
     <title><%= content_for(:title) || "Pr Store" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,13 +30,31 @@
       <%= render "shared/navbar" %>
 
       <main class="overflow-hidden flex grow relative">
-        <div class="flex absolute w-full inset-0 bg-gradient-to-br z-10 from-purple-900/35 via-black to-purple-900/35">
-          <div class="container mx-auto px-4">
-            <%= yield %>
-          </div>
-        </div>
+        <div class="flex absolute w-full inset-0 bg-gradient-to-br z-10 from-purple-900/35 via-black to-purple-900/35"></div>
 
+        <div class="container mx-auto px-4 relative z-40">
+          <%= yield %>
+        </div>
       </main>
+        <%# <script>
+        VANTA.DOTS({
+          el: "#vanta-bg",
+          backgroundColor: 0x000000,
+          color: 0x7b20ff,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 0.00,
+          minWidth: 0.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          size: 2.60,
+          spacing: 87.00,
+          showLines: false
+        })
+        </script> %>
+      
+
       <div>
         <%= render "shared/footer", class: "" %>
       </div>
