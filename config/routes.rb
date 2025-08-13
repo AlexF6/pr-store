@@ -1,18 +1,14 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :users
   # Home page
   root "pages#home"
 
-  # Sessions (login/logout)
-  get    "login",  to: "sessions#new"     # form to log in
-  post   "login",  to: "sessions#create"  # submit login form
-  delete "logout", to: "sessions#destroy" # log out
+  # login
+  get "login", to: "sessions#new"
 
-  # Registrations (sign up)
-  get  "sign_up", to: "registrations#new"    # form to register
-  post "sign_up", to: "registrations#create" # submit registration form
-
-  # Users (profiles, edit account)
-  resources :users, only: [ :show, :edit, :update, :destroy ]
+  # form to register
+  get "register", to: "users#new"
 
   # Password reset flow
   resources :passwords, param: :token
