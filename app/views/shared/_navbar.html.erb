@@ -1,5 +1,5 @@
 <header class=" bg-black/95 border-b border-pink-600/20 sticky top-0 z-50 text-gray-400 font-semibold">
-  <div class="container mx-auto px-4 py-5">
+  <div class="container mx-auto px-4 py-4">
     
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
@@ -19,12 +19,7 @@
       <%# </div> %>
       
       <div>
-        <button
-          class="p-2 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-700 hover:from-purple-900 hover:to-fuchsia-800 border-0">
-            <span>
-              Login
-            </span>
-        </button>
+        <%= link_to "Login", sign_up_path, class: "p-2 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-700 hover:from-purple-900 hover:to-fuchsia-800 border-0" %>
       </div>
     </div>
   </div>

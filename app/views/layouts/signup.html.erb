@@ -25,19 +25,9 @@
 
   <body>
     <div class="flex flex-col min-h-screen bg-black text-gray-300">
-      <%= render "shared/navbar" %>
-
-      <main class="overflow-hidden flex grow relative">
-        <div class="flex absolute w-full inset-0 bg-gradient-to-br z-10 from-purple-900/35 via-black to-purple-900/35">
-          <div class="container mx-auto px-4">
-            <%= yield %>
-          </div>
-        </div>
-
+      <main class="flex grow relative">
+        <%= yield %>
       </main>
-      <div>
-        <%= render "shared/footer", class: "" %>
-      </div>
     </div>
   </body>
 </html>

@@ -1,0 +1,38 @@
+<div class="text-white w-full  flex flex-col relative">
+  <div class="flex absolute w-full inset-0 bg-gradient-to-br from-purple-900/35 via-black to-purple-900/35">
+
+    <!-- Back -->
+    <div class="p-6">
+      <%= link_to root_path, class: "inline-flex items-center text-white hover:bg-gray-500 p-2 rounded-lg" do %>
+        <!-- Arrow icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back
+      <% end %>
+    </div>
+
+    <!-- SignUp Section -->
+    <div class="container mx-auto flex flex-1 items-center justify-center px-6 pb-25">
+      <div class="flex flex-col items-center space-y-5">
+        
+        <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mb-8">
+          <!-- User icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A8 8 0 0112 15a8 8 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+
+        <div class="text-3xl font-bold px-10">
+          Welcome
+        </div>
+
+
+
+        <% if flash[:alert] %>
+          <p class="text-red-500 text-sm"><%= flash[:alert] %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
