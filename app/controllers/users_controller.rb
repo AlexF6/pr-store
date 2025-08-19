@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout "signup", only: [ :new ]
+  layout "signup"
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
@@ -19,8 +19,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to @user, notice: "User was successfully created."
+      session[:user_id] = @user.id   # log in right after sign up
+      redirect_to root_path, notice: "Welcome! Your account was created successfully"
     else
+      flash.now[:alert] = "Invalid password"
       render :new, status: :unprocessable_entity
     end
   end

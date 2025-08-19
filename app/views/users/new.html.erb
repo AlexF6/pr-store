@@ -20,15 +20,15 @@
 
           <!-- Flash messages -->
           <% if alert = flash[:alert] %>
-            <p class="py-2 px-3 bg-red-50 text-red-500 font-medium rounded-lg inline-block w-full text-center">
-              <%= alert %>
-            </p>
-          <% end %>
-          <% if notice = flash[:notice] %>
-            <p class="py-2 px-3 bg-green-50 text-green-500 font-medium rounded-lg inline-block w-full text-center">
-              <%= notice %>
-            </p>
-          <% end %>
+           <p class="py-2 px-3 bg-gray-800 text-red-500 tracking-wider font-normal rounded-lg inline-block w-full text-center">
+            <%= alert %>
+           </p>
+           <% end %>
+           <%# <% if notice = flash[:notice] %>
+           <%# <p class="py-2 px-3 bg-green-50 text-green-500 font-medium rounded-lg inline-block w-full text-center">
+           <%# <%= notice %>
+           <%# </p>
+           <% end %>
 
           <!-- User icon -->
           <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mb-4">
@@ -40,7 +40,7 @@
           <div class="text-3xl font-bold px-10">Sign Up</div>
 
           <!-- Form -->
-          <%= form_with model: @user, class: "w-full flex flex-col space-y-4" do |form| %>
+          <%= form_with model: @user, class: "w-full flex flex-col space-y-6" do |form| %>
 
             <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username",
               placeholder: "Email",
@@ -52,17 +52,17 @@
               maxlength: 72,
               class: "border-b border-gray-600 focus:border-gray-400 focus:outline-0 transition-all duration-500 p-2 rounded-2xl w-full bg-transparent text-white" %>
 
-            <%= form.password_field :password, required: true, autocomplete: "current-password",
-              placeholder: "Password",
+            <%= form.password_field :password_confirmation, required: true, autocomplete: "current-password",
+              placeholder: "password confirmation",
               maxlength: 72,
               class: "border-b border-gray-600 focus:border-gray-400 focus:outline-0 transition-all duration-500 p-2 rounded-2xl w-full bg-transparent text-white" %>
 
             <div class="flex items-center justify-between w-full opacity-80">
-              <%= link_to "Forgot password?", new_password_path,
-                class: "text-gray-400 hover:text-gray-200 underline hover:no-underline" %>
-
-              <%= form.submit "Sign in",
-                class: "hover:bg-violet-900 w-24 transition-all duration-300 bg-violet-600/80 text-white rounded-md px-3.5 py-2.5 font-medium cursor-pointer" %>
+              <%= form.submit "Sign up",
+                class: "hover:bg-violet-900 transition-all duration-300 bg-violet-600/70 text-white rounded-2xl px-10 py-2 font-medium cursor-pointer" %>
+              <%= link_to "Login", login_path,
+                class: "hover:bg-violet-900 transition-all duration-300 bg-violet-600/70 text-white rounded-2xl px-10 py-2 font-medium cursor-pointer" %>
+            
             </div>
           <% end %>
         </div>
