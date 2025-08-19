@@ -1,4 +1,4 @@
-<header class=" bg-black/95 border-b border-pink-600/20 sticky top-0 z-50 text-lg text-gray-400 font-semibold">
+<header class=" bg-black/95 border-b border-pink-600/20 sticky top-0 z-50 text-xl text-gray-300 font-semibold">
   <div class="container mx-auto px-4 py-4">
     
     <div class="flex items-center justify-between">
@@ -9,9 +9,21 @@
       <div>
         <span><%= link_to "Products", products_path %></span>
       </div>
-      <div>
-        Contact
-      </div>
+
+      <%= link_to cart_path, class: "relative inline-flex items-center gap-2 text-gray-300" do %>
+        <%= image_tag "shopping-bag.svg", class: "size-5" %>
+        <span>Cart</span>
+        <% count = current_cart.cart_items.sum(:quantity) rescue 0 %>
+        <% if count.positive? %>
+          <span class="absolute -top-1 -right-6 rounded-full text-xs px-1.5 py-0.5 bg-pink-700 text-white">
+            <%= count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <%#  <div>
+      <%#    Contact
+      <%#  </div>
       <%# <div> %>
         <%# <span> %>
           <%#<%= link_to "Usuarios", users_path %>
