@@ -23,6 +23,16 @@
             <%= number_to_currency(product.price, unit: "$", separator: ",", delimiter: ".", precision: 0) %>
           </span>
         </div>
+        <%= form_with url: cart_items_path, method: :post, class: "flex items-center gap-2" do %>
+          <%= hidden_field_tag :product_id, product.id %>
+          <p>
+            Cantidad
+          </p>
+          <%= number_field_tag :quantity, 1, min: 1, class: "w-10" %>
+          <%= submit_tag "Agregar al carrito", class: "rounded-lg border border-pink-500/50 px-3 py-2 text-pink-300 hover:bg-pink-500/10 transition-colors btn" %>
+        <% end %>
+
+
       </div>
     </div>
   <% end %>

@@ -10,8 +10,18 @@ class Cart < ApplicationRecord
 
   def add_product(product_id, qty = 1)
     product = Product.find(product_id)
+    qty = qty.to_i
+    qty = 1 if qty < 1
+
     item = cart_items.find_or_initialize_by(product: product)
-    item.quantity = (item.quantity || 0) + qty
+
+    item.quantity =
+      if item.new_record?
+        qty
+      else
+        item.quantity.to_i + qty
+      end
+
     item.unit_price = product.price
     item.subtotal   = item.unit_price * item.quantity
     item.save!

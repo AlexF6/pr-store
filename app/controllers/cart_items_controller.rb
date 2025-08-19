@@ -5,16 +5,16 @@ class CartItemsController < ApplicationController
   def create
     product_id = params.require(:product_id)
     qty        = params.fetch(:quantity, 1).to_i.clamp(1, 999)
-    # (opcional) validar stock:
+
     product = Product.find(product_id)
     if product.stock && qty > product.stock
-      return redirect_back fallback_location: products_path,
-                           alert: "No hay stock suficiente."
+      return redirect_back fallback_location: products_path, alert: "No hay stock suficiente."
     end
 
     @cart.add_product(product_id, qty)
-    redirect_to cart_path, notice: "Producto agregado."
+    redirect_back fallback_location: products_path, notice: "Producto agregado."
   end
+
 
   def update
     item = @cart.cart_items.find(params[:id])
