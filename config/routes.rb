@@ -15,4 +15,8 @@ Rails.application.routes.draw do
 
   # Products CRUD
   resources :products
+
+  resource  :cart, only: [ :show ]       # GET /cart
+  resources :cart_items, only: [ :create, :update, :destroy ]
+  # resources :products, only: [ :index, :show ]
 end
