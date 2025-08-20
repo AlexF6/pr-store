@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   layout "signup"
+  skip_before_action :require_authentication, olny: [ :new, :create ]
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id   # log in right after sign up
+      session[:user_id] = @user.id
       redirect_to root_path, notice: "Welcome! Your account was created successfully"
     else
       flash.now[:alert] = "Invalid password"
