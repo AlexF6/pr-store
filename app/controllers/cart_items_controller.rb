@@ -1,5 +1,6 @@
 # app/controllers/cart_items_controller.rb
 class CartItemsController < ApplicationController
+  skip_before_action :require_authentication, only: [ :create ]
   before_action :set_cart
 
   def create

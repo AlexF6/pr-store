@@ -1,5 +1,6 @@
 # app/controllers/carts_controller.rb
 class CartsController < ApplicationController
+  include Authentication
   skip_before_action :require_authentication, only: [ :show ]
   def show
     @cart = current_cart

@@ -30,9 +30,14 @@
         <%# </span> %>
       <%# </div> %>
       
-      <div>
-        <%= link_to "Login", login_path, class: "p-2 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-700 hover:from-purple-900 hover:to-fuchsia-800 border-0" %>
-      </div>
+    <div>
+      <% if authenticated? %>
+        <%= button_to "Logout", session_path, method: :delete,
+              class: "p-2 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-700 hover:from-purple-900 hover:to-fuchsia-800 border-0" %>
+      <% else %>
+        <%= link_to "Login", login_path,
+              class: "p-2 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-700 hover:from-purple-900 hover:to-fuchsia-800 border-0" %>
+      <% end %>
     </div>
   </div>
 </header>

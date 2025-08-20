@@ -23,41 +23,49 @@
             <%= number_to_currency(product.price, unit: "$", separator: ",", delimiter: ".", precision: 0) %>
           </span>
         </div>
-        <%= form_with url: cart_items_path, method: :post, class: "flex items-center gap-3" do %>
-          <%= hidden_field_tag :product_id, product.id %>
-          <div
-            data-controller="qty"
-            data-qty-min-value="1"
-            <% if product.stock.present? %> data-qty-max-value="<%= product.stock %>" <% end %>
-            class="inline-flex items-center rounded-lg bg-gray-800 text-gray-100"
-            aria-label="Seleccionar cantidad"
-          >
-            <div class="flex">
-                            <button type="button"
-                      data-qty-target="decBtn" data-action="qty#dec"
-                      class="px-2 py-1 disabled:opacity-40">−</button>
-
-              <%= number_field_tag :quantity, 1,
-                    min: 1,
-                    max: (product.stock if product.stock),
-                    class: "w-12 text-center bg-transparent outline-none
-                    
-                            [appearance:textfield]
-                            [&::-webkit-outer-spin-button]:appearance-none
-                            [&::-webkit-inner-spin-button]:appearance-none",
-                    data: { qty_target: "input", action: "input->qty#input blur->qty#input" } %>
-
-              <button type="button"
-                      data-qty-target="incBtn" data-action="qty#inc"
-                      class="px-2 py-1 disabled:opacity-40">+</button>
-
-            </div>
+        <div>
+          <div class="block font-semibold space-y-0">
+            Cantidad
           </div>
+          <%= form_with url: cart_items_path, method: :post, class: "flex items-center gap-3" do %>
+            <%= hidden_field_tag :product_id, product.id %>
 
-          <%= submit_tag "Agregar al carrito",
-                class: "rounded-lg px-3 py-2 text-pink-300 transition-colors" %>
+            <div
+              data-controller="qty"
+              data-qty-min-value="1"
+              <% if product.stock.present? %> data-qty-max-value="<%= product.stock %>" <% end %>
+              class="inline-flex items-center rounded-lg bg-gray-800 text-gray-100"
+              aria-label="Seleccionar cantidad"
+            >
+
+              <div class="flex">
+                              <button type="button"
+                        data-qty-target="decBtn" data-action="qty#dec"
+                        class="px-2 py-1 disabled:opacity-40">−</button>
+
+                <%= number_field_tag :quantity, 1,
+                      min: 1,
+                      max: (product.stock if product.stock),
+                      class: "w-12 text-center bg-transparent outline-none
+                      
+                              [appearance:textfield]
+                              [&::-webkit-outer-spin-button]:appearance-none
+                              [&::-webkit-inner-spin-button]:appearance-none",
+                      data: { qty_target: "input", action: "input->qty#input blur->qty#input" } %>
+
+                <button type="button"
+                        data-qty-target="incBtn" data-action="qty#inc"
+                        class="px-2 py-1 disabled:opacity-40">+</button>
+
+              </div>
+            </div>
+
+            <%= submit_tag "Agregar al carrito",
+                  class: "rounded-lg px-3 py-1 text-pink-300 transition-colors border cursor-pointer" %>
           <% end %>
 
+        </div>
+        
 
       </div>
     </div>
