@@ -26,38 +26,18 @@
 
 
   <body>
-    <div class="flex flex-col min-h-screen bg-black text-gray-300">
-      <%= render "shared/navbar" %>
+    <%= image_tag "smodel.webp", class: "max-h-screen z-20 absolute inset-0 size-240 mx-auto object-cover opacity-60 z-0" %>
+    <div class="relative flex flex-col min-h-screen bg-black text-gray-400">
+    <div class="flex absolute w-full inset-0 bg-gradient-to-br z-10 from-purple-900/45 via-black to-purple-900/45"></div>
+     
+      <%= render "shared/navbarhome" %>
 
-      <main class="overflow-hidden flex grow relative">
-        <div class="flex absolute w-full inset-0 bg-gradient-to-br z-10 from-purple-900/35 via-black to-purple-900/35"></div>
+      <main class="overflow-hidden flex grow">
 
         <div class="container mx-auto px-4 relative z-40">
           <%= yield %>
         </div>
       </main>
-        <%# <script>
-        VANTA.DOTS({
-          el: "#vanta-bg",
-          backgroundColor: 0x000000,
-          color: 0x7b20ff,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 0.00,
-          minWidth: 0.00,
-          scale: 1.00,
-          scaleMobile: 1.00,
-          size: 2.60,
-          spacing: 87.00,
-          showLines: false
-        })
-        </script> %>
-      
-
-      <div>
-        <%= render "shared/footer", class: "" %>
-      </div>
     </div>
   </body>
 </html>
