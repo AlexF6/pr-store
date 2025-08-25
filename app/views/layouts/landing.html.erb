@@ -26,7 +26,7 @@
 
 
   <body>
-    <%= image_tag "smodel.webp", class: "max-h-screen z-20 absolute inset-0 size-240 mx-auto object-cover opacity-60 z-0" %>
+    <%= image_tag "smodel.webp", class: "lg:hidden max-h-screen z-20 absolute inset-0 size-240 mx-auto object-cover opacity-60 z-0" %>
     <div class="relative flex flex-col min-h-screen bg-black text-gray-400">
     <div class="flex absolute w-full inset-0 bg-gradient-to-br z-10 from-purple-900/45 via-black to-purple-900/45"></div>
      
@@ -38,6 +38,8 @@
           <%= yield %>
         </div>
       </main>
+      <%= render "shared/footerhome" %>
+
     </div>
   </body>
 </html>
