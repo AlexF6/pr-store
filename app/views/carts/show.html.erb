@@ -15,28 +15,41 @@
     </div>
 
     <!-- Items -->
-    <% @cart.cart_items.each do |item| %>
-      <div class="grid grid-cols-5 items-center px-4 py-4 text-sm border-b border-gray-800 hover:bg-gray-800/40 transition">
-        <div class="font-medium text-gray-200"><%= item.product.name %></div>
-        <div class="text-gray-300"><%= number_to_currency(item.unit_price) %></div>
-      <div class="flex items-center space-x-2">
-        <%= form_with model: item, url: cart_item_path(item), method: :put, local: true, class: "flex items-center space-x-2" do |f| %>
-          <%= f.number_field :quantity, value: item.quantity, min: 1,
-                class: "w-16 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 px-2 py-1 text-center",
-                onchange: "this.form.submit();" %>
-        <% end %>
-      </div>
+    <!-- Items -->
+<% @cart.cart_items.each do |item| %>
+  <div class="grid grid-cols-5 items-center px-4 py-4 text-sm border-b border-gray-800 hover:bg-gray-800/40 transition">
+    
+    <!-- Producto con miniatura -->
+    <div class="flex items-center space-x-3 font-medium text-gray-200">
+      <%= image_tag item.product.image_src,
+            alt: item.product.name,
+            class: "w-12 h-12 object-cover rounded-lg shadow" %>
+      <span><%= item.product.name %></span>
+    </div>
 
+    <!-- Precio -->
+    <div class="text-gray-300"><%= number_to_currency(item.unit_price) %></div>
 
-        <div class="text-gray-300 font-medium"><%= number_to_currency(item.subtotal) %></div>
-        
-        <div>
-          <%= button_to "Remove", cart_item_path(item), method: :delete, 
-                data: { confirm: "¿Remove este producto?" },
-                class: "px-3 py-1 rounded-lg bg-red-700 hover:bg-red-700 text-white text-xs font-medium" %>
-        </div>
-      </div>
-    <% end %>
+    <!-- Cantidad editable -->
+    <div class="flex items-center space-x-2">
+      <%= form_with model: item, url: cart_item_path(item), method: :put, local: true, class: "flex items-center space-x-2" do |f| %>
+        <%= f.number_field :quantity, value: item.quantity, min: 1,
+              class: "w-16 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 px-2 py-1 text-center",
+              onchange: "this.form.submit();" %>
+      <% end %>
+    </div>
+
+    <!-- Subtotal -->
+    <div class="text-gray-300 font-medium"><%= number_to_currency(item.subtotal) %></div>
+    
+    <!-- Botón eliminar -->
+    <div>
+      <%= button_to "Remove", cart_item_path(item), method: :delete, 
+            data: { confirm: "¿Remove este producto?" },
+            class: "px-3 py-1 rounded-lg bg-red-700 hover:bg-red-600 text-white text-xs font-medium" %>
+    </div>
+  </div>
+<% end %>
 
     <!-- Total -->
     <div class="grid grid-cols-5 px-4 py-4 font-semibold text-gray-200">

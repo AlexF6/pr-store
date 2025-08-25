@@ -1,13 +1,63 @@
-<p style="color: green"><%= notice %></p>
-
-<div class="flex max-w-100 mx-auto justify-center space-y-6 text-gray-400 py-20 lg:py-32">
-  <div class="space-y-6">
-    <%= render @product %>
-    <div class="flex justify-between gap-6">
-      <%= link_to "Edit this product", edit_product_path(@product), class: "text-center border rounded-xl p-2 px-6"  %>
-      <%= button_to "Destroy this product", @product, method: :delete, class: "border rounded-xl p-2 px-6" %>
+<div class="max-w-4xl mx-auto rounded-2xl shadow-lg overflow-hidden py-20 lg:py-32 text-gray-200">
+  <div class="grid grid-cols-1 md:grid-cols-2">
+    <!-- Imagen del producto -->
+    <div class="overflow-hidden">
+      <%= image_tag @product.image_src,
+            alt: @product.name,
+            class: "w-full h-full object-cover transition-transform duration-500 hover:scale-105" %>
     </div>
-    <%= link_to "Back to products", products_path, class: "flex justify-center text-center border rounded-xl p-2 px-6 w-full"  %>
+
+    <!-- Información del producto -->
+    <div class="p-8 space-y-6 flex flex-col justify-center">
+      <h2 class="text-3xl font-bold text-white"><%= @product.name %></h2>
+      <p class="text-gray-400"><%= @product.description %></p>
+
+      <div class="flex space-x-3 items-center">
+        <span class="text-lg font-semibold text-gray-400">Price:</span>
+        <span class="text-lg font-bold"><%= number_to_currency(@product.price) %></span>
+      </div>
+
+      <div class="flex space-x-3 items-center">
+        <span class="text-lg font-semibold text-gray-400">Stock:</span>
+        <span><%= @product.stock %></span>
+      </div>
+
+      <!-- Formulario para agregar al carrito -->
+      <%= form_with url: cart_items_path, method: :post, class: "flex items-center gap-4" do %>
+        <%= hidden_field_tag :product_id, @product.id %>
+
+        <!-- Selector de cantidad -->
+        <div
+          data-controller="qty"
+          data-qty-min-value="1"
+          <% if @product.stock.present? %> data-qty-max-value="<%= @product.stock %>" <% end %>
+          class="inline-flex items-center rounded-lg bg-gray-800 text-gray-100"
+          aria-label="Seleccionar cantidad"
+        >
+          <div class="flex">
+            <button type="button"
+              data-qty-target="decBtn" data-action="qty#dec"
+              class="px-2 py-2 disabled:opacity-40">−</button>
+
+            <%= number_field_tag :quantity, 1,
+                  min: 1,
+                  max: (@product.stock if @product.stock),
+                  class: "w-12 text-center bg-transparent outline-none
+                          [appearance:textfield]
+                          [&::-webkit-outer-spin-button]:appearance-none
+                          [&::-webkit-inner-spin-button]:appearance-none",
+                  data: { qty_target: "input", action: "input->qty#input blur->qty#input" } %>
+
+            <button type="button"
+              data-qty-target="incBtn" data-action="qty#inc"
+              class="px-2 py-1 disabled:opacity-40">+</button>
+          </div>
+        </div>
+
+        <!-- Botón submit -->
+        <%= submit_tag "Add to Cart",
+              class: "rounded-xl px-5 py-2 font-semibold bg-purple-600 hover:bg-purple-700 text-white transition cursor-pointer" %>
+      <% end %>
+    </div>
   </div>
 </div>
-

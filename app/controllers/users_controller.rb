@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   layout "signup"
-  skip_before_action :require_authentication, olny: [ :new, :create ]
+  skip_before_action :require_authentication, only: [ :new ]
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index

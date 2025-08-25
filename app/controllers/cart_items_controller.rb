@@ -13,7 +13,7 @@ class CartItemsController < ApplicationController
     end
 
     @cart.add_product(product_id, qty)
-    redirect_back fallback_location: products_path, notice: "Producto agregado."
+    redirect_back fallback_location: products_path
   end
 
 
@@ -29,13 +29,13 @@ class CartItemsController < ApplicationController
       end
       item.update!(quantity: qty, subtotal: item.unit_price * qty)
     end
-    redirect_to cart_path, notice: "Carrito actualizado."
+    redirect_to cart_path
   end
 
   def destroy
     item = @cart.cart_items.find(params[:id])
     item.destroy
-    redirect_to cart_path, notice: "Producto eliminado."
+    redirect_to cart_path
   end
 
   private
