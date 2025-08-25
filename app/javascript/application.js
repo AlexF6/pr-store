@@ -2,21 +2,14 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const btn = document.querySelector(".checkout-btn");
   const flash = document.getElementById("flash-message");
 
   if (btn && flash) {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-
-      // mostrar mensaje
       flash.classList.remove("hidden");
-
-      // ocultar después de 3 segundos
-      setTimeout(() => {
-        flash.classList.add("hidden");
-      }, 3000);
     });
   }
 });
