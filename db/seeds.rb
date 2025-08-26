@@ -8,6 +8,12 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# db/seeds.rb
+
+# Clear existing products
+Product.destroy_all
+
+# Create products again
 Product.create!([
   {
     name: "Dark Archangel T-shirt",
