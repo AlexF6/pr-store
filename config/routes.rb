@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   # form to register
   get "register", to: "users#new"
 
-  # Password reset flow
-  resources :passwords, param: :token
+  # # Password reset flow
+  # resources :passwords, param: :token
 
   # Products CRUD
   resources :products

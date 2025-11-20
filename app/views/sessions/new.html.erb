@@ -1,74 +1,101 @@
-<div class="text-white bg-black min-h-screen relative flex flex-col">
-  <div class="flex absolute w-full inset-0 bg-gradient-to-br z-10 from-purple-900/35 via-black to-purple-900/35">
+<div class="relative min-h-screen flex flex-col items-center justify-center bg-black text-gray-200 overflow-hidden font-sans">
+  
+  <!-- Fondo ambiental animado -->
+  <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-black to-indigo-900/40 z-0"></div>
+  <div class="absolute -top-40 -left-40 w-80 h-80 bg-purple-700 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+  <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-indigo-700 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
-    <!-- Back -->
-    <div class="flex w-full flex-col">
-      <div class="p-6">
-        <%= link_to root_path, class: "text-white hover:bg-gray-500 p-2 rounded-lg inline-flex items-center" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  <!-- Botón Regresar (Posicionado absolutamente arriba a la izquierda) -->
+  <div class="absolute top-6 left-6 z-20">
+    <%= link_to root_path, class: "group flex items-center space-x-2 text-gray-400 hover:text-white transition-colors duration-300" do %>
+      <div class="p-2 rounded-full bg-white/5 group-hover:bg-white/10 border border-white/5 transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </div>
+      <span class="text-sm font-medium tracking-wide">Back to Home</span>
+    <% end %>
+  </div>
+
+  <!-- Tarjeta Glassmorphism -->
+  <div class="relative z-10 w-full max-w-md px-6">
+    
+    <!-- Mensajes Flash (Alertas) -->
+    <% if flash[:alert] %>
+      <div class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm text-center backdrop-blur-sm flex items-center justify-center gap-2 animate-pulse">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-200 text-sm text-center backdrop-blur-sm">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <div class="bg-gray-900/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-8 sm:p-10">
+      
+      <!-- Header -->
+      <div class="text-center mb-10">
+        <div class="mx-auto w-16 h-16 bg-linear-to-tr from-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-900/50 mb-4 transform rotate-3 hover:rotate-6 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
           </svg>
-          <span class="hidden sm:flex">
-            Back
-          </span>
-        <% end %>
-      </div>
-
-      <!-- Sign in section -->
-      <div class="container w-full mx-auto flex flex-1 items-center justify-center px-6 pb-24">
-        <div class="flex flex-col items-center space-y-5 w-full max-w-sm">
-
-          <!-- Flash messages -->
-          <% if alert = flash[:alert] %>
-            <p class="py-2 px-3 bg-gray-800 text-red-500 tracking-wider font-medium rounded-lg inline-block w-full text-center">
-              <%= alert %>
-            </p>
-          <% end %>
-          <% if notice = flash[:notice] %>
-            <p class="py-2 px-3 bg-green-50 text-green-500 font-medium rounded-lg inline-block w-full text-center">
-              <%= notice %>
-            </p>
-          <% end %>
-
-          <!-- User icon -->
-          <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4 4 0 018 17h8a4 4 0 012.879 1.196M15 11a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </div>
-
-          <div class="text-3xl font-bold px-10">Sign in</div>
-
-          <!-- Form -->
-          <%= form_with url: session_url, class: "w-full flex flex-col space-y-6" do |form| %>
-
-            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username",
-              placeholder: "Email",
-              value: params[:email_address],
-              class: "border-b border-gray-600 focus:border-gray-400 focus:outline-0 transition-all duration-500 p-2 rounded-2xl w-full bg-transparent text-white" %>
-
-            <%= form.password_field :password, required: true, autocomplete: "current-password",
-              placeholder: "Password",
-              maxlength: 72,
-              class: "border-b border-gray-600 focus:border-gray-400 focus:outline-0 transition-all duration-500 p-2 rounded-2xl w-full bg-transparent text-white" %>
-
-            <div class="flex items-center justify-between w-full opacity-80">
-              <%= form.submit "Sign in",
-                class: "hover:bg-violet-900 transition-all duration-300 bg-violet-600/70 text-white rounded-2xl px-10 py-2 font-medium cursor-pointer" %>
-
-              <%= link_to "Forgot password?", new_password_path,
-                class: "text-gray-400 hover:text-gray-200 underline hover:no-underline" %>
-            </div>
-            <div class="flex items-center justify-between w-full opacity-80">
-              <p class= "text-gray-400 hover:no-underline">
-                Don't you have an account?&nbsp;
-                <%= link_to " Create new", register_path, 
-                class:"transition-all duration-300 text-white rounded-2xl py-2 font-medium cursor-pointer" %>
-              </p>
-            </div>
-          <% end %>
         </div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">Welcome</h1>
+        <p class="text-gray-400 text-sm mt-2">Enter your credentials to access</p>
       </div>
+
+      <!-- Formu -->
+      <%= form_with url: session_url, class: "space-y-6" do |form| %>
+        
+        <!-- Email Input -->
+        <div class="space-y-1">
+          <label class="text-xs font-medium text-gray-400 ml-1">Email Address</label>
+          <div class="relative group">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-500 group-focus-within:text-purple-400 transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+            </div>
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "name@example.com",
+                class: "block w-full pl-10 pr-3 py-3 border border-gray-700 rounded-xl leading-5 bg-gray-800/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 focus:bg-gray-800 transition duration-200 sm:text-sm" %>
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="space-y-1">
+          <label class="text-xs font-medium text-gray-400 ml-1">Password</label>
+          <div class="relative group">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-500 group-focus-within:text-purple-400 transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "••••••••",
+                class: "block w-full pl-10 pr-3 py-3 border border-gray-700 rounded-xl leading-5 bg-gray-800/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 focus:bg-gray-800 transition duration-200 sm:text-sm" %>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-2">
+          <%= form.submit "Sign In",
+              class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 focus:ring-offset-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer shadow-lg shadow-purple-900/30" %>
+        </div>
+      <% end %>
+
+      <!-- Footer -->
+      <div class="mt-8 pt-6 border-t border-gray-700/50 text-center">
+        <p class="text-sm text-gray-400">
+          Don't have an account yet?
+          <%= link_to register_path, class: "font-medium text-purple-400 hover:text-purple-300 transition-colors relative inline-block group" do %>
+            Create a new one
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-purple-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          <% end %>
+        </p>
+      </div>
+
     </div>
   </div>
 </div>

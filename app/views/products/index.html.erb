@@ -24,12 +24,12 @@
           <%# </p> %>
         </div>
         <div class="flex items-center justify-between">
-          <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <span class="text-2xl font-bold bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             <%= number_to_currency(product.price, unit: "$", separator: ",", delimiter: ".", precision: 0) %>
           </span>
         </div>
         <div>
-  <div class="block font-semibold">Cantidad</div>
+  <div class="block font-semibold">Quantity</div>
 
   <%= form_with url: cart_items_path, method: :post,
       class: "flex flex-wrap items-center gap-3" do %>
@@ -66,7 +66,7 @@
 
     <!-- Botón -->
     <div class="basis-full sm:basis-auto">
-      <%= submit_tag "Agregar al carrito",
+      <%= submit_tag "Add to cart",
           class: "rounded-lg border px-2.5 py-2 text-pink-300 transition-colors cursor-pointer
                   w-full sm:w-auto whitespace-nowrap shrink-0 max-w-50" %>
     </div>
