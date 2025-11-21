@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # form to register
   get "register", to: "users#new"
 
+  get "up" => "rails/health#show", as: :rails_health_check
+
   # # Password reset flow
   # resources :passwords, param: :token
 

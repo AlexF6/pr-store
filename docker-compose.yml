@@ -1,0 +1,90 @@
+x-security: &security_hardening
+  cap_drop: ["ALL"]
+  security_opt: ["no-new-privileges:true"]
+  ulimits:
+    nofile:
+      soft: 4096
+      hard: 8192
+
+x-logging: &logging_rotated
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "5"
+
+networks:
+  elysium-network:
+
+volumes:
+  rails_storage:
+
+secrets:
+  rails_master_key:
+    file: ./secrets/rails_master_key.txt
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: elysium-proxy
+    <<: [ *logging_rotated ] 
+    restart: unless-stopped
+    depends_on:
+      rails-app:
+        condition: service_healthy
+    networks: [ elysium-network ]
+    cpus: "0.50"
+    mem_limit: "256m"
+    volumes:
+      - ./ops/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ops/nginx/conf.d/rails_app.conf:/etc/nginx/conf.d/app.conf:ro
+    tmpfs:
+      - /var/run
+      - /var/cache/nginx
+
+  rails-app:
+    build: .
+    image: rails-elysium-app
+    container_name: elysium-core
+    <<: [ *security_hardening, *logging_rotated ]
+    restart: unless-stopped
+    networks: [ elysium-network ]
+    user: "1000:1000"
+    cpus: "1.00"
+    mem_limit: "1g"
+    
+    environment:
+      RAILS_ENV: production
+      DATABASE_URL: "sqlite3:///app/storage/production.sqlite3"
+      RAILS_MASTER_KEY_FILE: /run/secrets/rails_master_key
+      RAILS_SERVE_STATIC_FILES: "true"
+      BINDing: "0.0.0.0" 
+    
+    secrets:
+      - rails_master_key
+    
+    volumes:
+      - ./storage:/app/storage
+      - ./tmp:/app/tmp
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  cloudflared:
+    image: cloudflare/cloudflared:2025.10.1
+    container_name: elysium-tunnel
+    <<: [ *security_hardening, *logging_rotated ]
+    restart: unless-stopped
+    networks: [ elysium-network ]
+    depends_on:
+      nginx:
+        condition: service_started
+    cpus: "0.30"
+    mem_limit: "128m"
+    tmpfs:
+      - /tmp
+    command: ["tunnel", "--no-autoupdate", "--url", "http://nginx:8080"]
